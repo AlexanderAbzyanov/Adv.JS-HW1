@@ -17,17 +17,25 @@ const goods = [
         title: 'Shoes',
         price: 250,
     },
+    {
+        title: 'Sneakers', // Добавлен товар без указания цены
+    },
+];
 ];
 
-const renderGoodsItem = (title, price) => {
-    return (`<div class="goodsAndButton"><div class="goods-item"><h3>${title}</h3><p>${price} USD</p></div>
-            <div><img src='https://placehold.it/150x100'><img></div>
-           <div><button class="sale-button" type="button">В корзину</button></div></div>`)
-};
+// Здесь добавлены значения "по умолчанию"
+// Здесь также можно немного упростить запись: убрать фигурные скобки и убрать оператор return, если фукнция включает только один return/
+// В следующей фукнции можно убрать скобки у единственного аргумента list. Других упрощений, наверное, нет.
 
-const renderGoodsList = (list) => {
+const renderGoodsItem = (title = 'Наименование отсутствует', price = 'Цена не указана') => 
+     `<div class="goodsAndButton"><div class="goods-item"><h3>${title}</h3><p>${price} USD</p></div>
+            <div><img src='https://placehold.it/130x80'><img></div>
+           <div><button class="sale-button" type="button">В корзину</button></div></div>`;
+
+// Оператор join("") позволяет убрать "лишние" запятые в списке товаров.
+const renderGoodsList = list => {
     let goodsList = list.map(item => renderGoodsItem(item.title, item.price));
-    document.querySelector('.goods-list').innerHTML = goodsList;
+    document.querySelector('.goods-list').innerHTML = goodsList.join("");
 };
 
 renderGoodsList(goods);
